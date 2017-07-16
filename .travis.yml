@@ -1,13 +1,11 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-
 language: R
 sudo: false
 cache: packages
-
 r_packages:
-    - covr
-
+- covr
 after_success:
-    - Rscript -e 'library(covr); codecov()'
-
-
+- Rscript -e 'library(covr); codecov();'
+notifications:
+  slack:
+    rooms:
+      secure: OH3qQWrDV/l7Qu++s2KoScq0BDFY2bRNwPTh1Ey4t4K04aLNe+N0vZis/nZy+P4/Xo5qeQR6IGmVgjrsypgSRNFMfuoT9CXLo333FW17j/oKYHANRnlKOwvx1WXGgMu/cj8YiOBGowhK1wj88d3ibCw0iaiqeSQTd1uARG6W3a2eWxpIYVFQMhdLEeS/AlJvn1XCpFLCiVqnNHz9f9hcWCqm6z3Q0XaiWnF/jKZ4i2af946xN4ssiikhHkAX0UWkTDM8M05nZqHCWHe6ZR+dx77w/0sCKfYWTpNyYl1oi1QaSQamdbuPE1FIMHSgKdgBmvclUCuaTvs52TlND2r7OaC8etvVKUGbHMNQYct71Bm/N/iGQcWQAABuzX1JUamh1Ayj7BLnwsZ/KVGQ7CgaZu1SK8xZ7z50FVD+D34qxgZhShS2NACjxcJOk9QEcFy3nJEgsLICqWxetI4FIqcQlUscNiQOaV8xvVuI7q0JpTVOYiwQxCVNbPFZAUyw3JSKU5VvIA1TkB2EO/qfVrV6p7nA1MOsUrIJXyRTaY8ISjB9OdJOdhtBGLeYD9SUpxWYXQwhN4ZKAVIp35ZVRJdJAsGgwJZSjRckoXvFPSc+21CSbqST22nD/s+hx2IT65j0xZUL615WEXGHs1zQbPtu1MLUMzS7L6gnVRRjjv/hO8M=

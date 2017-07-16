@@ -7,7 +7,7 @@ test_that("results list is converted correctly", {
     xml2::read_html() %>%
     parse_node_text(".SearchHeadCell")
 
-  expect_is(search_results_to_dataframe(results_list), "data.frame")
-  expect_length(search_results_to_dataframe(results_list)[[1]], 15)
-  expect_length(search_results_to_dataframe(results_list), 2)
+  expect_is(results_to_dataframe(results_list), "data.frame")
+  expect_length(results_to_dataframe(results_list)[[1]], 15)
+  expect_length(results_to_dataframe(results_list), 2)
 })

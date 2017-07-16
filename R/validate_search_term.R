@@ -17,7 +17,7 @@ validate_search_term <- function(search_term, num_results, max_num_results){
   }
 
   if (num_results == 0) {
-    stop("Your search query did not return any results.")
+    warning("Your search query did not return any results.")
   }
 
   if (num_results < 0) {

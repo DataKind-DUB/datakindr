@@ -5,10 +5,13 @@
 \title{Internal convenience wrapper to get the inner HTML content given a
 valid URL request.}
 \usage{
-get_httr_html_content(request)
+get_httr_html_content(request, content_encoding = "ISO-8859-1")
 }
 \arguments{
 \item{request}{A completed httr request.}
+
+\item{content_encoding}{Encoding type for decoding httr responses. Defaults
+to \emph{ISO-8859-1}.}
 }
 \value{
 The inner HTML content of the httr request.

@@ -18,6 +18,7 @@ A ggplot2 theme object to make creating plots and visualisations simpler
 and easier. Just add "+ dk_theme" when building your plot layers.
 }
 \examples{
+\dontrun{
 ggplot2::ggplot(data.frame( y = runif(100, min = 0, max = 20) +
   seq(1, 100, 1),
   x = seq(1, 100, 1),
@@ -28,7 +29,8 @@ ggplot2::ggplot(data.frame( y = runif(100, min = 0, max = 20) +
   ggplot2::geom_smooth(se = TRUE) +
   ggplot2::labs(title = "Some Data (2011)",
       x = "Range", y = "Value") +
-  dk_theme
+  dk_theme +
+  ggplot2::scale_fill_manual(values = dk_sequential_palette)
 
 ggplot2::ggplot(data.frame( x = c('Primary 1', 'Primary 2',
                                  'Secondary 1', 'Secondary 2'),
@@ -38,5 +40,7 @@ ggplot2::ggplot(data.frame( x = c('Primary 1', 'Primary 2',
   ggplot2::labs(title = "Some Data (2011)",
                 x = "Range", y = "Value") +
   dk_theme
+  }
+
 }
 \keyword{datasets}

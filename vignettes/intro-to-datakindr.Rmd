@@ -1,0 +1,120 @@
+---
+title: "Introduction to Datakindr"
+author: "Cormac Nolan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Datakindr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo = F, include = F, warning = F, message=F, error=F}
+
+library(ggplot2)
+library(knitr)
+library(datakindr)
+
+opts_chunk$set(fig.width=6, fig.height=4)
+opts_chunk$set(echo = F, warning = F, error = F, message = F)
+
+```
+## What Is It For?
+Datakindr provides tools, utilities, data and more for use by the DataKind Dublin team. It includes a convenient interface to CSO.ie's Statbank, a ggplot2 theme and colour palettes for convenient & consistent visualisations.
+
+The package is in the early stages of development but it is intended that this package will become a kind of "Swiss Army Knife". It should mean easy and frictionless solving of commonly encountered problems for Datakind volunteers (e.g., querying the CSO's Statbank).
+
+## What Does It Do?  
+Currently there are two main tasks that datakindr makes easier:
+
+1. Querying the CSO's Statbank API.
+2. Making consistent & beautiful visualisations.
+
+### CSO and Statbank
+There are two functions available for this task: 
+
+* `search_statbank_dataset()` Gets a list of datasets from a search query.
+* `get_cso_dataset()` Gets the actual data from Statbank.
+
+### Visualisations
+There are two sets of data objects here for helping volunteers create consistent plots and other visualisations.
+
+* `dk_theme` A ggplot2 object that will help you effortlessly create visualisations like this:
+```{r first plot, echo=FALSE, fig.width = 7, fig.height = 3}
+ggplot(data.frame( y = runif(100, min = 0, max = 20) +
+                     seq(1, 100, 1),
+                   x = seq(1, 100, 1),
+                   z = rep_len(c("a", "b", "c", "d"), 100)),
+       aes(x, y, colour = z, fill = z)) +
+  geom_point() +
+  facet_wrap(~z, nrow = 1) +
+  geom_smooth(se = TRUE) +
+  labs(title = "Some Data (2011)",
+       x = "Range", y = "Value") +
+  dk_theme
+
+
+```
+* `dk_palette` A palette of 2 primary, 2 secondary and 2 background colours. The primary and secondary colours can be seen above.  
+    + `dk_sequential_palette` An extended version of the above palette intended for use with sequential data.
+    + `dk_non_sequential_palette` Another extended palette for (obviously!) non-sequential data.
+
+## How Do I Use It?
+I'll let the code do the talking here.
+
+### Theme Demo
+```{r using dk_theme, echo = T}
+# install.packages("devtools")
+# devtools::install_github("DataKind-DUB/datakindr")
+# Development version: devtools::install_github("cormac85/datakindr")
+library(datakindr)
+
+data_example <- data.frame( x = c('Primary 1', 'Primary 2',
+                                  'Secondary 1', 'Secondary 2'),
+                            y = runif(4, 10, 100))
+
+ggplot(data_example, aes(x,y, fill = x)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Some Data (2011)",
+       x = "Range", y = "Value") +
+  dk_theme # <- Here's the theme!
+
+```
+
+### Statbank Demo
+```{r get dataset code, echo = T}
+library(dplyr)
+dataset_names <- search_statbank_datasets("garda")
+dataset_names[1,1]
+dataset_names[1,2]
+```
+
+
+```{r use dataset code, echo = T}
+industry_population <- get_cso_dataset(dataset_names$dataset_code[1])
+
+industry_population %>% 
+  filter(grepl("Both", Sex)) %>%
+  filter(grepl("1991", `Census Year`)) %>% 
+  filter(grepl("services", `Detailed Industrial Group`)) %>% 
+  select(`Detailed Industrial Group`, `Census Year`, value) %>% 
+  arrange(desc(value))
+
+
+```
+
+### Bringing It All Together
+```{r altogether now, echo = T}
+
+ggplot(industry_population %>% 
+         filter(grepl("Garda|Defence", `Detailed Industrial Group`)) %>% 
+         filter(grepl("Male|Female", Sex)) %>% 
+         filter(!grepl("2016", `Census Year`)),
+       aes(x = `Census Year`, y = value, fill = Sex)) + 
+  facet_wrap(~`Detailed Industrial Group`, nrow = 1) +
+  geom_bar(stat= "identity") +
+  labs(title = "Population Working in Industrial Group", y = "Population") +
+  dk_theme
+
+
+```

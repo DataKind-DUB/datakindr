@@ -3,7 +3,7 @@
 #' @param cso_dataset_code A dataset code.
 #' @return A data frame of arbitrary dimension and size containing a StatBank dataset.
 #' @examples
-#' get_cso_dataset("LRM07")
+#' \dontrun{get_cso_dataset("LRM07")}
 #' @export
 
 get_cso_dataset <- function(cso_dataset_code){

@@ -1,26 +1,22 @@
 Package: datakindr
 Type: Package
 Title: Tools And Utilities for DataKind
-Version: 0.0.0.9000
+Version: 0.1.8
+Date: 2017-07-13
 Author: Cormac Nolan
-Authors@R: person("Cormac", "Nolan", email = "cormacnolan85@gmail.com",  
-    role = c("aut", "cre"))
+Authors@R: person("Cormac", "Nolan", email = "cormacnolan85@gmail.com",
+        role = c("aut", "cre"))
 Maintainer: Cormac Nolan <cormacnolan85@gmail.com>
-Description: Provides tools, utilities, data and more for use by the DataKind
-    Dublin team. Including a convenient interface to CSO.ie's Statbank and a
-    ggplot2 theme and colour palette for convenient & consistent visualisation
-    styles.
+Description: Provides tools, utilities, data and more for use by the
+        DataKind Dublin team. Including a convenient interface to
+        CSO.ie's Statbank and a ggplot2 theme and colour palette for
+        convenient & consistent visualisation styles.
 Depends: R (>= 3.3.1)
 License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
-Imports: tidyr,
-    rvest,
-    httr,
-    magrittr,
-    stringr,
-    xml2,
-    rjstat,
-    ggplot2
-Suggests: testthat, mockery
+Imports: tidyr, rvest, httr, magrittr, stringr, xml2, rjstat, knitr,
+        ggplot2
+Suggests: testthat, mockery, rmarkdown, dplyr
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr

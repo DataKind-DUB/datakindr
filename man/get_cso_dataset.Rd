@@ -16,5 +16,5 @@ A data frame of arbitrary dimension and size containing a StatBank dataset.
 Gets a CSO.ie StatBank dataset when given a dataset code.
 }
 \examples{
-get_cso_dataset("LRM07")
+\dontrun{get_cso_dataset("LRM07")}
 }

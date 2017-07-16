@@ -12,7 +12,7 @@ test_that("error is generated for too many search results.", {
 })
 
 test_that("error is generated when no search result.", {
-  expect_error(validate_search_term("age", 0, 500),
+  expect_warning(validate_search_term("age", 0, 500),
                "Your search query did not return any results.")
 })
 
